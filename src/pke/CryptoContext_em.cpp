@@ -746,6 +746,10 @@ EvalKey<Element> ReKeyGenWrappedTwo(const CryptoContext<Element> &cc,
 using CC = CryptoContextImpl<DCRTPoly>;
 using CC_prime = CryptoContext<DCRTPoly>;
 EMSCRIPTEN_BINDINGS(CryproContext) {
+  emscripten::class_<DCRTPoly>("DCRTPoly")
+      .smart_ptr<std::shared_ptr<DCRTPoly>>("std::shared_ptr<DCRTPoly>");
+
+  emscripten::register_vector<unsigned int>("VectorUint");
 
   emscripten::function("GenCryptoContextBFV", &GenCryptoContextBFV);
   emscripten::function("GenCryptoContextCKKS", &GenCryptoContextCKKS);
