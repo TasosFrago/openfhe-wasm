@@ -88,9 +88,20 @@ endif ()
 
 add_compile_options("-DOPENFHE_VERSION=${OpenFHE_VERSION}")
 
+option(GENERATE_TS_BINDINGS "Generate Typescript bindings definition files (.d.ts)" OFF)
+
 ### add each of the subdirs of src
 add_subdirectory(src/core)
 add_subdirectory(src/pke)
+
+if(GENERATE_TS_BINDINGS)
+	if(TARGET openfhe_pke_es6)
+		message(STATUS "Typescript defintion generation enabled for openfhe_pke_es6")
+		target_link_options(openfhe_pke_es6 PRIVATE
+			"--emit-tsd" "openfhe_pke_es6.d.ts"
+		)
+	endif()
+endif()
 
 #find_package(Doxygen QUIET COMPONENTS dot)
 #if (DOXYGEN_FOUND)
