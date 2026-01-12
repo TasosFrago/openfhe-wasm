@@ -102,7 +102,6 @@ if(GENERATE_TS_BINDINGS)
 		target_link_options(openfhe_pke_es6 PRIVATE
 			"SHELL:--emit-tsd ${CMAKE_CURRENT_BINARY_DIR}/openfhe_pke_es6.d.ts"
 		)
-		message(STATUS "[EMCMAKE_DEBUG]: ${CMAKE_CURRENT_BINARY_DIR}/")
 	endif()
 endif()
 
