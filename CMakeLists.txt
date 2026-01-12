@@ -69,6 +69,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
             -sEXCEPTION_DEBUG=true
             -sMAXIMUM_MEMORY=4GB
             -sRUNTIME_LOGGING=true
+	    -sWASM_BIGINT=1
     )
 
 else ()
@@ -82,6 +83,7 @@ else ()
             -sERROR_ON_UNDEFINED_SYMBOLS=0
             -sMAXIMUM_MEMORY=4GB
             -sDISABLE_EXCEPTION_CATCHING
+	    -sWASM_BIGINT=1
     )
 endif ()
 
@@ -98,8 +100,9 @@ if(GENERATE_TS_BINDINGS)
 	if(TARGET openfhe_pke_es6)
 		message(STATUS "Typescript defintion generation enabled for openfhe_pke_es6")
 		target_link_options(openfhe_pke_es6 PRIVATE
-			"--emit-tsd" "openfhe_pke_es6.d.ts"
+			"SHELL:--emit-tsd ${CMAKE_CURRENT_BINARY_DIR}/openfhe_pke_es6.d.ts"
 		)
+		message(STATUS "[EMCMAKE_DEBUG]: ${CMAKE_CURRENT_BINARY_DIR}/")
 	endif()
 endif()
 
